@@ -19,7 +19,7 @@
      <rect>
       <x>20</x>
       <y>30</y>
-      <width>91</width>
+      <width>101</width>
       <height>16</height>
      </rect>
     </property>
@@ -30,7 +30,7 @@
    <widget class="QLineEdit" name="lE_DirNum">
     <property name="geometry">
      <rect>
-      <x>100</x>
+      <x>130</x>
       <y>30</y>
       <width>113</width>
       <height>20</height>
@@ -60,7 +60,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>选择存储位置</string>
+     <string>选择位置</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_2">
@@ -73,7 +73,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>文件数值：</string>
+     <string>文件数量：</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="lE_FileNum">
@@ -112,6 +112,130 @@
      <string>生成</string>
     </property>
    </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>110</y>
+      <width>91</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>文件名长度：</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit_FileNameLen">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>110</y>
+      <width>113</width>
+      <height>21</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnSelLocForFileNameLen">
+    <property name="geometry">
+     <rect>
+      <x>370</x>
+      <y>110</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>选择位置</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnGenFile_NameLen">
+    <property name="geometry">
+     <rect>
+      <x>460</x>
+      <y>110</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>生成</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="radioBtn_txt">
+    <property name="geometry">
+     <rect>
+      <x>240</x>
+      <y>110</y>
+      <width>115</width>
+      <height>19</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>txt</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="radioBtn_jpeg">
+    <property name="geometry">
+     <rect>
+      <x>290</x>
+      <y>110</y>
+      <width>115</width>
+      <height>19</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>jpeg</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_4">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>150</y>
+      <width>111</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>文件大小(MB)：</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit_FileFixSize">
+    <property name="geometry">
+     <rect>
+      <x>130</x>
+      <y>150</y>
+      <width>113</width>
+      <height>21</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnSelLocForFileSize">
+    <property name="geometry">
+     <rect>
+      <x>370</x>
+      <y>150</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>选择位置</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnGenFile_FileFixSize">
+    <property name="geometry">
+     <rect>
+      <x>460</x>
+      <y>150</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>生成</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
@@ -119,7 +243,7 @@
      <x>0</x>
      <y>0</y>
      <width>606</width>
-     <height>23</height>
+     <height>26</height>
     </rect>
    </property>
   </widget>

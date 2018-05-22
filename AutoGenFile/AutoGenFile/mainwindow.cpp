@@ -8,6 +8,7 @@
 #include <QIntValidator>
 #include <QFile>
 #include <QFileInfo>
+#include<QTime>
 
 #define AUTOGEN_DIR_NAME    "tmp"
 
@@ -20,8 +21,15 @@ MainWindow::MainWindow(QWidget *parent) :
     //static
     connect(this->ui->btnGenDir,SIGNAL(clicked(bool)),this,SLOT(GenSomeDir()));
     connect(this->ui->btnSelLoc,SIGNAL(clicked(bool)),this,SLOT(SelTargetLoc()));
+    connect(this->ui->btnSelLocForFileNameLen,SIGNAL(clicked(bool)),this,SLOT(SelTargetLoc()));
     connect(this->ui->btnSelFile,SIGNAL(clicked(bool)),this,SLOT(SelTargetFile()));
     connect(this->ui->btnGenFile,SIGNAL(clicked(bool)),this,SLOT(GenSomeFile()));
+    connect(this->ui->btnGenFile_NameLen,SIGNAL(clicked(bool)),this,SLOT(GenOneFile()));
+    connect(this->ui->radioBtn_txt,SIGNAL(clicked(bool)),this,SLOT(RadioBtnTXT_Clicked()));
+    connect(this->ui->radioBtn_jpeg,SIGNAL(clicked(bool)),this,SLOT(RadioBtnJPEG_Clicked()));
+    connect(this->ui->btnSelLocForFileSize,SIGNAL(clicked(bool)),this,SLOT(SelTargetLoc()));
+    connect(this->ui->btnGenFile_FileFixSize,SIGNAL(clicked(bool)),this,SLOT(GenOneFileWithFixSize()));
+    qSuffix = ".txt";
 }
 
 MainWindow::~MainWindow()
@@ -41,15 +49,27 @@ int MainWindow::GetNeedGenFileNum()
     return this->ui->lE_FileNum->text().toInt(&ok,10);
 }
 
+int MainWindow::GetFileNameLength()
+{
+    bool ok;
+    return this->ui->lineEdit_FileNameLen->text().toInt(&ok,10);
+}
+
+int MainWindow::GetFileFixSize()
+{
+    bool ok;
+    return this->ui->lineEdit_FileFixSize->text().toInt(&ok,10);
+}
+
 void MainWindow::SelTargetLoc()
 {
-    qTargetDir = QFileDialog::getExistingDirectory(this,tr("选择保存路径"),"");
+    qTargetDir = QFileDialog::getExistingDirectory(this,tr("选择保存路径"),"D:/MyGit/AutoGenFile/AutoGenFile/TestFile/");
     qDebug() << "Save File Dir is " << qTargetDir;
 }
 
 void MainWindow::SelTargetFile()
 {
-    qTargetFile = QFileDialog::getOpenFileName(this,tr("选择要复制的文件"),"E:/QTWorkSpace/AutoGenFile/TestFile/",tr("*.*"));
+    qTargetFile = QFileDialog::getOpenFileName(this,tr("选择要复制的文件"),"D:/MyGit/AutoGenFile/AutoGenFile/TestFile/",tr("*.*"));
     qDebug() << qTargetFile;
 }
 
@@ -79,4 +99,50 @@ void MainWindow::GenSomeFile()
     qDebug() << "GenSomeFile,Num = " << Num;
 
     autoGenTool->AutoGenSomeFile(Num,qTargetFile);
+}
+
+QString GetRandStringName(int length)
+{
+    QString tmp = QString("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghjklmnopqrstuvwxyz");
+    QString str = QString();
+    QTime t;
+    t= QTime::currentTime();
+    qsrand(t.msec()+t.second()*1000);
+    for(int i=0; i< length; i++)
+    {
+        int ir = qrand()%(tmp.length());
+        str[i] = tmp.at(ir);
+    }
+    qDebug() << "GetRandStringName: str = " << str;
+    return str;
+}
+
+void MainWindow::GenOneFile()
+{
+    QString filename = GetRandStringName(GetFileNameLength());
+    qDebug() << "GenOneFile: filename = " << filename << "qSuffix = " << qSuffix;
+    if(!autoGenTool->AutoGenOneFile(qTargetDir,filename + qSuffix))
+    {
+        int Maxlen = 255 - qSuffix.length();
+        QString str1 = "文件长度过大，请不要超过";
+        QString str2 = QString::number(Maxlen, 10);
+        QString warningmes = str1 + str2;
+        QMessageBox::warning(NULL,"警告",warningmes,QMessageBox::Ok,QMessageBox::NoButton);
+    }
+    //QFile::resize(filename,100);
+}
+
+void MainWindow::RadioBtnJPEG_Clicked()
+{
+    qSuffix = ".jpeg";
+}
+
+void MainWindow::RadioBtnTXT_Clicked()
+{
+    qSuffix = ".txt";
+}
+
+void MainWindow::GenOneFileWithFixSize()
+{
+    autoGenTool->AutoGenOneFileWithFixSize(qTargetDir,GetFileFixSize()*1024*1024);
 }

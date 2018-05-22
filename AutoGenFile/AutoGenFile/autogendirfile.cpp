@@ -54,6 +54,44 @@ void AutoGenDirFile::AutoGenSomeFile(int count, QString orgFileName)
 }
 
 
+bool AutoGenDirFile::AutoGenOneFile(QString dir, QString filename)
+{
+    QFile qfile;
+    qDebug() << "hanson:AutoGenOneFile, dir =  " << dir << "filename = " << filename;
+    QDir::setCurrent(dir);
 
+    if(QFile::exists(filename))
+    {
+        qDebug() << "hanson:AutoGenOneFile, File is already exist !";
+        return true;
+    }
+    qfile.setFileName(filename);
+    if(!qfile.open(QIODevice::WriteOnly | QIODevice::Text))
+    {
+        qDebug() << "Can't open the file!" << endl;
+        return false;
+    }
+    //qfile.resize(10000);
+    qfile.close();
+
+    return true;
+}
+
+bool AutoGenDirFile::AutoGenOneFileWithFixSize(QString dir, int size)
+{
+    qDebug() << "hanson:AutoGenOneFileWithFixSize, dir =  " << dir << "size = " << size;
+    QFile qfile;
+    QDir::setCurrent(dir);
+    qfile.setFileName("Test.jpeg");
+    if(!qfile.open(QIODevice::WriteOnly | QIODevice::Text))
+    {
+        qDebug() << "Can't open the file!" << endl;
+        return false;
+    }
+    qfile.resize(size);
+    qfile.close();
+
+    return true;
+}
 
 

@@ -18,18 +18,25 @@ public:
 
     int GetTargetDirLayerNum();
     int GetNeedGenFileNum();
+    int GetFileNameLength();
+    int GetFileFixSize();
 
 private slots:
     void GenSomeDir();
     void SelTargetLoc();
     void SelTargetFile();
     void GenSomeFile();
+    void GenOneFile();
+    void RadioBtnTXT_Clicked();
+    void RadioBtnJPEG_Clicked();
+    void GenOneFileWithFixSize();
 
 private:
     Ui::MainWindow *ui;
     QString qTargetDir;
     QString qTargetFile;
     AutoGenDirFile *autoGenTool;
+    QString qSuffix;
 };
 
 #endif // MAINWINDOW_H
