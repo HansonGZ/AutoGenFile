@@ -30,6 +30,10 @@ private slots:
     void RadioBtnTXT_Clicked();
     void RadioBtnJPEG_Clicked();
     void GenOneFileWithFixSize();
+    void ChecklEDirNumValid();
+    void ChecklEFileNumNumValid();
+    void ChecklEFileNameLenValid();
+    void ChecklEFileFixSizeValid();
 
 private:
     Ui::MainWindow *ui;
